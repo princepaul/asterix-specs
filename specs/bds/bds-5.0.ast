@@ -9,7 +9,7 @@ preamble
 
 items
 
-    RA_STATUS "Roll Angle Status"
+    RASTATUS "Roll Angle Status"
         definition
             Validity of the roll angle value.
         element 1
@@ -17,7 +17,7 @@ items
                 0: Not valid
                 1: Valid
 
-    RA_SIGN "Roll Angle Sign"
+    RASIGN "Roll Angle Sign"
         definition
             Sign of the roll angle magnitude.
         element 1
@@ -34,9 +34,9 @@ items
         element 9
             unsigned quantity 45/256 "°"
         remark
-            Combined with RA_SIGN into a single signed value.
+            Combined with RASIGN into a single signed value.
 
-    TTA_STATUS "True Track Angle Status"
+    TTASTATUS "True Track Angle Status"
         definition
             Validity of the true track angle value.
         element 1
@@ -44,7 +44,7 @@ items
                 0: Not valid
                 1: Valid
 
-    TTA_SIGN "True Track Angle Sign"
+    TTASIGN "True Track Angle Sign"
         definition
             Sign of the true track angle magnitude.
         element 1
@@ -61,9 +61,9 @@ items
         element 10
             unsigned quantity 90/512 "°"
         remark
-            Combined with TTA_SIGN into a single signed value.
+            Combined with TTASIGN into a single signed value.
 
-    GS_STATUS "Ground Speed Status"
+    GSSTATUS "Ground Speed Status"
         definition
             Validity of the ground speed value.
         element 1
@@ -77,7 +77,7 @@ items
         element 10
             unsigned quantity 2 "kt"
 
-    TAR_STATUS "Track Angle Rate Status"
+    TARSTATUS "Track Angle Rate Status"
         definition
             Validity of the track angle rate value.
         element 1
@@ -85,7 +85,7 @@ items
                 0: Not valid
                 1: Valid
 
-    TAR_SIGN "Track Angle Rate Sign"
+    TARSIGN "Track Angle Rate Sign"
         definition
             Sign of the track angle rate magnitude.
         element 1
@@ -101,9 +101,9 @@ items
         element 9
             unsigned quantity 8/256 "°/s"
         remark
-            Combined with TAR_SIGN into a single signed value.
+            Combined with TARSIGN into a single signed value.
 
-    TAS_STATUS "True Airspeed Status"
+    TASSTATUS "True Airspeed Status"
         definition
             Validity of the true airspeed value.
         element 1

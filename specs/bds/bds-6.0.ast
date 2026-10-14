@@ -9,7 +9,7 @@ preamble
 
 items
 
-    HDG_STATUS "Heading Status"
+    HDGSTATUS "Heading Status"
         definition
             Validity of the magnetic heading value.
         element 1
@@ -17,7 +17,7 @@ items
                 0: Not valid
                 1: Valid
 
-    HDG_SIGN "Magnetic Heading Sign"
+    HDGSIGN "Magnetic Heading Sign"
         definition
             Sign of the magnetic heading magnitude.
         element 1
@@ -34,9 +34,9 @@ items
         element 10
             unsigned quantity 90/512 "°"
         remark
-            Combined with HDG_SIGN into a single signed value.
+            Combined with HDGSIGN into a single signed value.
 
-    IAS_STATUS "Indicated Airspeed Status"
+    IASSTATUS "Indicated Airspeed Status"
         definition
             Validity of the indicated airspeed value.
         element 1
@@ -50,7 +50,7 @@ items
         element 10
             unsigned quantity 1 "kt"
 
-    MACH_STATUS "Mach Status"
+    MACHSTATUS "Mach Status"
         definition
             Validity of the Mach number value.
         element 1
@@ -64,7 +64,7 @@ items
         element 10
             unsigned quantity 1/250 "Mach"
 
-    BAR_STATUS "Barometric Vertical Rate Status"
+    BARSTATUS "Barometric Vertical Rate Status"
         definition
             Validity of the barometric vertical rate value.
         element 1
@@ -72,7 +72,7 @@ items
                 0: Not valid
                 1: Valid
 
-    BAR_SIGN "Barometric Vertical Rate Sign"
+    BARSIGN "Barometric Vertical Rate Sign"
         definition
             Sign of the barometric vertical rate magnitude.
         element 1
@@ -88,9 +88,9 @@ items
         element 9
             unsigned quantity 32 "ft/min"
         remark
-            Combined with BAR_SIGN into a single signed value.
+            Combined with BARSIGN into a single signed value.
 
-    IVV_STATUS "Inertial Vertical Rate Status"
+    IVVSTATUS "Inertial Vertical Rate Status"
         definition
             Validity of the inertial vertical rate value.
         element 1
@@ -98,7 +98,7 @@ items
                 0: Not valid
                 1: Valid
 
-    IVV_SIGN "Inertial Vertical Rate Sign"
+    IVVSIGN "Inertial Vertical Rate Sign"
         definition
             Sign of the inertial vertical rate magnitude.
         element 1
@@ -114,4 +114,4 @@ items
         element 9
             unsigned quantity 32 "ft/min"
         remark
-            Combined with IVV_SIGN into a single signed value.
+            Combined with IVVSIGN into a single signed value.

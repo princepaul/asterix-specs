@@ -26,7 +26,7 @@ items
             Set to 0 if any of the three parameters are invalid. Identical
             to the status bit in BDS 5,2.
 
-    LAT_SIGN "Latitude Sign"
+    LATSIGN "Latitude Sign"
         definition
             Hemisphere of the latitude.
         element 1
@@ -42,12 +42,12 @@ items
         element 19
             unsigned quantity 360/1048576 "°"
         remark
-            Combined with LAT_SIGN into a single signed value.
+            Combined with LATSIGN into a single signed value.
             Coded with an MSB of 90 degrees so that the same coding
             algorithm applies as for longitude; the required valid range
             is +90 to -90 degrees.
 
-    LON_SIGN "Longitude Sign"
+    LONSIGN "Longitude Sign"
         definition
             Hemisphere of the longitude.
         element 1
@@ -63,9 +63,9 @@ items
         element 19
             unsigned quantity 360/1048576 "°"
         remark
-            Combined with LON_SIGN into a single signed value.
+            Combined with LONSIGN into a single signed value.
 
-    ALT_SIGN "Altitude Sign"
+    ALTSIGN "Altitude Sign"
         definition
             Sign of the altitude.
         element 1
@@ -81,6 +81,6 @@ items
         element 14
             unsigned quantity 8 "ft"
         remark
-            Combined with ALT_SIGN into a single signed value.
+            Combined with ALTSIGN into a single signed value.
             The source of the data is given by the FOM/SOURCE field of
             BDS 5,2.

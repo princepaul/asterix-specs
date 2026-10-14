@@ -47,7 +47,7 @@ items
         element 3
             unsigned integer
 
-    NIC_A "NIC Supplement A"
+    NICA "NIC Supplement A"
         definition
             Navigation integrity category supplement A.
         element 1
@@ -69,7 +69,7 @@ items
         element 2
             unsigned integer
 
-    NIC_BARO "NIC Baro"
+    NICBARO "NIC Baro"
         definition
             Navigation integrity category supplement, barometric.
         element 1
@@ -87,7 +87,7 @@ items
                 0: True north
                 1: Magnetic north
 
-    SIL_SUP "SIL Supplement"
+    SILSUP "SIL Supplement"
         definition
             Surveillance integrity level supplement, ADS-B version 2.
         element 1

@@ -6,7 +6,7 @@ preamble
 
 items
 
-    MCP_ALT_STATUS "MCP Altitude Status"
+    MCPALTSTATUS "MCP Altitude Status"
         definition
             Validity of the MCP/FCU selected altitude value.
         element 1
@@ -14,9 +14,9 @@ items
                 0: Not valid
                 1: Valid
         remark
-            When 0, MCP_ALT should be ignored.
+            When 0, MCPALT should be ignored.
 
-    MCP_ALT "MCP/FCU Selected Altitude"
+    MCPALT "MCP/FCU Selected Altitude"
         definition
             Selected altitude from the Mode Control Panel / Flight Control Unit.
         element 12
@@ -24,7 +24,7 @@ items
         remark
             MSB = 32768 ft, LSB = 16 ft.
 
-    FMS_ALT_STATUS "FMS Altitude Status"
+    FMSALTSTATUS "FMS Altitude Status"
         definition
             Validity of the FMS selected altitude value.
         element 1
@@ -32,13 +32,13 @@ items
                 0: Not valid
                 1: Valid
 
-    FMS_ALT "FMS Selected Altitude"
+    FMSALT "FMS Selected Altitude"
         definition
             Selected altitude from the Flight Management System vertical profile.
         element 12
             unsigned quantity 16 "ft"
 
-    BP_STATUS "Barometric Pressure Status"
+    BPSTATUS "Barometric Pressure Status"
         definition
             Validity of the barometric pressure setting value.
         element 1
@@ -56,9 +56,9 @@ items
 
     spare 8
 
-    MODE_STATUS "Status of MCP/FCU Mode Bits"
+    MODESTATUS "Status of MCP/FCU Mode Bits"
         definition
-            Validity of the MCP/FCU mode bits (VNAV, ALT_HOLD, APP).
+            Validity of the MCP/FCU mode bits (VNAV, ALTHOLD, APP).
         element 1
             table
                 0: No mode information provided
@@ -72,7 +72,7 @@ items
                 0: Not active
                 1: Active
 
-    ALT_HOLD "ALT HOLD Mode"
+    ALTHOLD "ALT HOLD Mode"
         definition
             Altitude hold mode active.
         element 1
@@ -90,7 +90,7 @@ items
 
     spare 2
 
-    TARGET_ALT_STATUS "Status of Target Altitude Source"
+    TARGETALTSTATUS "Status of Target Altitude Source"
         definition
             Validity of the target altitude source bits.
         element 1
@@ -98,7 +98,7 @@ items
                 0: No source information provided
                 1: Source information provided
 
-    TARGET_ALT_SOURCE "Target Altitude Source"
+    TARGETALTSOURCE "Target Altitude Source"
         definition
             Source of the target (short-term intent) altitude.
         element 2

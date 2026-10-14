@@ -442,15 +442,13 @@ instance Validate Expansion where
             withPreffix name $ do
                 when (addedOffset nsp /= mempty) "alignment error"
 
+-- A BDS register is a bit layout, so items are not required to start on a
+-- byte boundary (element 1 and element 2 bits are perfectly normal here).
+-- Only the individual items are validated.
 instance Validate Bds where
     validate (Bds _reg _title date _preamble items) = do
         validate date
-        forM_ items $ \case
-            Spare _ _ -> pure ()
-            Item nsp@(NonSpare (ItemName name) _ _ _) -> do
-                validate nsp
-                withPreffix name $ do
-                    when (addedOffset nsp /= mempty) "alignment error"
+        forM_ items validate
 
 instance Validate Asterix where
     validate = \case

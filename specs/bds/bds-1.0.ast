@@ -60,13 +60,13 @@ items
                 0: No specific services capability
                 1: Specific services capable
 
-    ELM_UP "Uplink ELM Throughput"
+    ELMUP "Uplink ELM Throughput"
         definition
             Uplink ELM throughput capability.
         element 3
             unsigned integer
 
-    ELM_DOWN "Downlink ELM Throughput"
+    ELMDOWN "Downlink ELM Throughput"
         definition
             Downlink ELM throughput capability.
         element 4

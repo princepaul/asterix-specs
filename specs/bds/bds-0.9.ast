@@ -47,7 +47,7 @@ items
         element 3
             unsigned integer
 
-    VEL_CASE "Velocity variant"
+    VELCASE "Velocity Variant"
         definition
             Speed components, layout depends on the subtype.
         case SUBTYPE
@@ -85,7 +85,7 @@ items
                             Combined with VEW into ground speed and track.
             3,4:
                 group
-                    HDG_STATUS "Heading Status"
+                    HDGSTATUS "Heading Status"
                         definition
                             Validity of the heading value.
                         element 1
@@ -98,7 +98,7 @@ items
                         element 10
                             unsigned quantity 360/1024 "°"
                         remark
-                            Valid only when HDG_STATUS is 1.
+                            Valid only when HDGSTATUS is 1.
                     AS_TYPE "Airspeed Type"
                         definition
                             Airspeed type.
@@ -117,7 +117,7 @@ items
                 group
                     spare 22
 
-    VR_SOURCE "Vertical Rate Source"
+    VRSOURCE "Vertical Rate Source"
         definition
             Source of the vertical rate.
         element 1
@@ -125,7 +125,7 @@ items
                 0: GNSS
                 1: Barometric
 
-    VR_SIGN "Vertical Rate Sign"
+    VRSIGN "Vertical Rate Sign"
         definition
             Sign of the vertical rate magnitude.
         element 1
@@ -133,7 +133,7 @@ items
                 0: Climb
                 1: Descent
 
-    VR_MAG "Vertical Rate Magnitude"
+    VRMAG "Vertical Rate Magnitude"
         definition
             Magnitude of the vertical rate.
         element 9
@@ -143,7 +143,7 @@ items
 
     spare 2
 
-    DIFF_SIGN "GNSS-Baro Difference Sign"
+    DIFFSIGN "GNSS-Baro Difference Sign"
         definition
             Sign of the GNSS minus barometric altitude difference.
         element 1
@@ -151,7 +151,7 @@ items
                 0: Positive
                 1: Negative
 
-    DIFF_MAG "GNSS-Baro Difference Magnitude"
+    DIFFMAG "GNSS-Baro Difference Magnitude"
         definition
             Magnitude of the GNSS minus barometric altitude difference.
         element 7

@@ -25,7 +25,7 @@ items
                 2: Temporary alert
                 3: SPI condition
 
-    NICB_SAF "NIC Supplement-B / Single Antenna Flag"
+    NICBSAF "NIC Supplement-B / Single Antenna Flag"
         definition
             NIC supplement-B (ADS-B v1/v2) or single antenna flag (v0).
         element 1
@@ -35,7 +35,7 @@ items
         remark
             Meaning depends on the ADS-B version.
 
-    ALT_CASE "Altitude encoding variant"
+    ALTCASE "Altitude Encoding Variant"
         definition
             Altitude encoding depends on the type code.
         case TC

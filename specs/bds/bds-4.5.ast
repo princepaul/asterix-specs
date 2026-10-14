@@ -7,7 +7,7 @@ preamble
 
 items
 
-    TURB_STATUS "Turbulence Status"
+    TURBSTATUS "Turbulence Status"
         definition
             Validity of the turbulence level.
         element 1
@@ -25,7 +25,7 @@ items
                 2: Moderate
                 3: Severe
 
-    WS_STATUS "Wind Shear Status"
+    WSSTATUS "Wind Shear Status"
         definition
             Validity of the wind shear level.
         element 1
@@ -43,7 +43,7 @@ items
                 2: Moderate
                 3: Severe
 
-    MB_STATUS "Microburst Status"
+    MBSTATUS "Microburst Status"
         definition
             Validity of the microburst level.
         element 1
@@ -61,7 +61,7 @@ items
                 2: Moderate
                 3: Severe
 
-    ICING_STATUS "Icing Status"
+    ICINGSTATUS "Icing Status"
         definition
             Validity of the icing level.
         element 1
@@ -79,7 +79,7 @@ items
                 2: Moderate
                 3: Severe
 
-    WV_STATUS "Wake Vortex Status"
+    WVSTATUS "Wake Vortex Status"
         definition
             Validity of the wake vortex level.
         element 1
@@ -97,7 +97,7 @@ items
                 2: Moderate
                 3: Severe
 
-    SAT_STATUS "Static Air Temperature Status"
+    SATSTATUS "Static Air Temperature Status"
         definition
             Validity of the static air temperature value.
         element 1
@@ -105,7 +105,7 @@ items
                 0: Not valid
                 1: Valid
 
-    SAT_SIGN "Static Air Temperature Sign"
+    SATSIGN "Static Air Temperature Sign"
         definition
             Sign of the static air temperature magnitude.
         element 1
@@ -121,9 +121,9 @@ items
         element 9
             unsigned quantity 1/4 "°C"
         remark
-            Combined with SAT_SIGN into a single signed value.
+            Combined with SATSIGN into a single signed value.
 
-    PRESS_STATUS "Static Pressure Status"
+    PRESSSTATUS "Static Pressure Status"
         definition
             Validity of the static pressure value.
         element 1
@@ -137,7 +137,7 @@ items
         element 11
             unsigned quantity 1 "hPa"
 
-    RH_STATUS "Radio Height Status"
+    RHSTATUS "Radio Height Status"
         definition
             Validity of the radio height value.
         element 1
@@ -145,7 +145,7 @@ items
                 0: Not valid
                 1: Valid
 
-    RADIO_HEIGHT "Radio Height"
+    RADIOHEIGHT "Radio Height"
         definition
             Radio (radar) height above terrain.
         element 12

@@ -7,7 +7,7 @@ preamble
     Source: EUROCONTROL, Mode-S Specific Services and Data Link Test Bench,
     "BDS 5,2 Position Report Fine" (Mode S Specific Service Format).
 
-    Coding: LAT_FINE and LON_FINE are two's complement. ALT uses the same
+    Coding: LATFINE and LONFINE are two's complement. ALT uses the same
     sign+magnitude two's complement coding as BDS 5,1.
 
 items
@@ -51,7 +51,7 @@ items
             below 1, therefore CPE (circular position error) is used.
             Values 6-10 and 14-15 are unassigned.
 
-    LAT_FINE "Latitude Fine"
+    LATFINE "Latitude Fine"
         definition
             Fine latitude offset, added to the BDS 5,1 latitude.
         element 18
@@ -60,7 +60,7 @@ items
             Two's complement coding, must be interpreted together with the
             corresponding parameter in BDS 5,1.
 
-    LON_FINE "Longitude Fine"
+    LONFINE "Longitude Fine"
         definition
             Fine longitude offset, added to the BDS 5,1 longitude.
         element 18
@@ -69,7 +69,7 @@ items
             Two's complement coding, must be interpreted together with the
             corresponding parameter in BDS 5,1.
 
-    ALT_SIGN "Altitude Sign"
+    ALTSIGN "Altitude Sign"
         definition
             Sign of the altitude.
         element 1
@@ -85,6 +85,6 @@ items
         element 14
             unsigned quantity 8 "ft"
         remark
-            Combined with ALT_SIGN into a single signed value.
+            Combined with ALTSIGN into a single signed value.
             When GNSS height is contained in this field, the pressure
             altitude can be obtained from BDS 5,1.

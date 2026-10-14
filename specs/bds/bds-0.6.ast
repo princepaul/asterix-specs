@@ -24,7 +24,7 @@ items
             Decoded to knots via a piecewise-linear lookup;
             0 means no information, 1 means stopped.
 
-    TRACK_STATUS "Track Status"
+    TRACKSTATUS "Track Status"
         definition
             Validity of the track value.
         element 1
@@ -32,10 +32,10 @@ items
                 0: Not valid
                 1: Valid
 
-    TRACK_CASE "Track variant"
+    TRACKCASE "Track Variant"
         definition
             Track value, present only when valid.
-        case TRACK_STATUS
+        case TRACKSTATUS
             1:
                 group
                     TRACK "Track"

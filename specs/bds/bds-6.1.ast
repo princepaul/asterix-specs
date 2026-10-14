@@ -24,7 +24,7 @@ items
                 1: Emergency and priority status
                 2: ACAS RA broadcast
 
-    STATUS_CASE "Status variant"
+    STATUSCASE "Status Variant"
         definition
             Status data, layout depends on the subtype.
         case SUBTYPE
@@ -131,14 +131,14 @@ items
                             table
                                 0: Allowed
                                 1: Prohibited
-                    RA_TERM "RA Terminated"
+                    RATERM "RA Terminated"
                         definition
                             Resolution advisory terminated.
                         element 1
                             table
                                 0: No
                                 1: Yes
-                    MULTI_THREAT "Multiple Threat Encounter"
+                    MULTITHREAT "Multiple Threat Encounter"
                         definition
                             Multiple threat encounter.
                         element 1
@@ -154,7 +154,7 @@ items
                                 1: ICAO address
                                 2: Altitude, range and bearing
                                 3: Reserved
-                    TID_CASE "Threat identity variant"
+                    TIDCASE "Threat Identity Variant"
                         definition
                             Threat identity data, layout depends on TTI.
                         case TTI

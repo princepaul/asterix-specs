@@ -23,7 +23,7 @@ items
         remark
             DO-260B compliant value is 1.
 
-    SIL_SUP "SIL Supplement"
+    SILSUP "SIL Supplement"
         definition
             Surveillance integrity level supplement, reserved.
         element 1
@@ -31,7 +31,7 @@ items
                 0: Not set
                 1: Set
 
-    SAL_SOURCE "Selected Altitude Source"
+    SALSOURCE "Selected Altitude Source"
         definition
             Source of the selected altitude.
         element 1
@@ -55,7 +55,7 @@ items
         remark
             Millibar = 800 + (raw - 1) * 0.8. Raw 0 means not available.
 
-    HDG_STATUS "Selected Heading Status"
+    HDGSTATUS "Selected Heading Status"
         definition
             Validity of the selected heading value.
         element 1
@@ -63,7 +63,7 @@ items
                 0: Not valid
                 1: Valid
 
-    SEL_HDG "Selected Heading"
+    SELHDG "Selected Heading"
         definition
             Selected heading.
         element 9
@@ -75,7 +75,7 @@ items
         element 4
             unsigned integer
 
-    NIC_BARO "NIC Baro"
+    NICBARO "NIC Baro"
         definition
             Navigation integrity category supplement, barometric.
         element 1
@@ -89,7 +89,7 @@ items
         element 2
             unsigned integer
 
-    MODE_STATUS "Mode Status"
+    MODESTATUS "Mode Status"
         definition
             Validity of the autopilot and navigation mode flags.
         element 1
@@ -97,11 +97,11 @@ items
                 0: Not valid
                 1: Valid
 
-    MODE_CASE "Autopilot mode variant"
+    MODECASE "Autopilot Mode Variant"
         definition
             Autopilot and navigation mode flags, valid only when
             the mode status bit is set.
-        case MODE_STATUS
+        case MODESTATUS
             1:
                 group
                     AUTOPILOT "Autopilot Engaged"
@@ -118,7 +118,7 @@ items
                             table
                                 0: Not active
                                 1: Active
-                    ALT_HOLD "Altitude Hold Mode"
+                    ALTHOLD "Altitude Hold Mode"
                         definition
                             Altitude hold mode active.
                         element 1

@@ -15,7 +15,7 @@ items
         remark
             Values above 4 indicate invalid data.
 
-    WIND_STATUS "Wind Status"
+    WINDSTATUS "Wind Status"
         definition
             Validity of the wind speed and direction values.
         element 1
@@ -23,19 +23,19 @@ items
                 0: Not valid
                 1: Valid
 
-    WIND_SPEED "Wind Speed"
+    WINDSPEED "Wind Speed"
         definition
             Wind speed.
         element 9
             unsigned quantity 1 "kt"
 
-    WIND_DIR "Wind Direction"
+    WINDDIR "Wind Direction"
         definition
             True wind direction.
         element 9
             unsigned quantity 180/256 "°"
 
-    SAT_SIGN "Static Air Temperature Sign"
+    SATSIGN "Static Air Temperature Sign"
         definition
             Sign of the static air temperature magnitude.
         element 1
@@ -51,9 +51,9 @@ items
         element 10
             unsigned quantity 1/4 "°C"
         remark
-            Combined with SAT_SIGN into a single signed value.
+            Combined with SATSIGN into a single signed value.
 
-    PRESS_STATUS "Static Pressure Status"
+    PRESSSTATUS "Static Pressure Status"
         definition
             Validity of the static pressure value.
         element 1
@@ -67,7 +67,7 @@ items
         element 11
             unsigned quantity 1 "hPa"
 
-    TURB_STATUS "Turbulence Status"
+    TURBSTATUS "Turbulence Status"
         definition
             Validity of the turbulence value.
         element 1
@@ -85,7 +85,7 @@ items
                 2: Moderate
                 3: Severe
 
-    HUM_STATUS "Humidity Status"
+    HUMSTATUS "Humidity Status"
         definition
             Validity of the humidity value.
         element 1
