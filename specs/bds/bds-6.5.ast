@@ -1,0 +1,98 @@
+bds 6,5 "ADS-B aircraft operational status"
+date 2026-10-14
+preamble
+    ADS-B aircraft operational status (typecode 31): capability class,
+    operational mode and version-dependent integrity fields. Only the
+    reliably positioned fields are decoded; the capability class and
+    operational mode sub-fields depend on subtype and ADS-B version.
+    Source: ICAO Doc 9871 (ICAO Annex 10 Vol. III) Mode S BDS register definition tables.
+
+items
+
+    TC "Type Code"
+        definition
+            ADS-B message type code.
+        element 5
+            unsigned integer
+        remark
+            31: aircraft operational status.
+
+    SUBTYPE "Subtype"
+        definition
+            Operational status subtype.
+        element 3
+            table
+                0: Airborne
+                1: Surface
+
+    CC "Capability Class Codes"
+        definition
+            Capability class codes, 16 bits raw.
+        element 16
+            raw
+        remark
+            Sub-field breakdown depends on subtype and ADS-B version.
+
+    OM "Operational Mode Codes"
+        definition
+            Operational mode codes, 16 bits raw.
+        element 16
+            raw
+        remark
+            Sub-field breakdown depends on subtype and ADS-B version.
+
+    VERSION "ADS-B Version"
+        definition
+            ADS-B version number.
+        element 3
+            unsigned integer
+
+    NIC_A "NIC Supplement A"
+        definition
+            Navigation integrity category supplement A.
+        element 1
+            table
+                0: Not set
+                1: Set
+
+    NACP "NACp"
+        definition
+            Navigation accuracy category for position.
+        element 4
+            unsigned integer
+
+    spare 2
+
+    SIL "SIL"
+        definition
+            Surveillance integrity level.
+        element 2
+            unsigned integer
+
+    NIC_BARO "NIC Baro"
+        definition
+            Navigation integrity category supplement, barometric.
+        element 1
+            table
+                0: Not set
+                1: Set
+        remark
+            Defined for airborne subtype with version 1 and above.
+
+    HRD "Heading Reference Direction"
+        definition
+            Heading reference direction.
+        element 1
+            table
+                0: True north
+                1: Magnetic north
+
+    SIL_SUP "SIL Supplement"
+        definition
+            Surveillance integrity level supplement, ADS-B version 2.
+        element 1
+            table
+                0: Not set
+                1: Set
+
+    spare 1

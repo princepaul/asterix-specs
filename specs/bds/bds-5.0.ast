@@ -1,0 +1,118 @@
+bds 5,0 "Track and turn report"
+date 2026-10-14
+preamble
+    Track and turn report, heading/track/roll/speed snapshot reported
+    by the flight management system.
+    Source: ICAO Doc 9871 Table A-2-34.
+    Note: signed angular fields use sign bit + magnitude encoding
+    (not two's complement).
+
+items
+
+    RA_STATUS "Roll Angle Status"
+        definition
+            Validity of the roll angle value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    RA_SIGN "Roll Angle Sign"
+        definition
+            Sign of the roll angle magnitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with RA into a single signed value
+            (sign = 1 gives value - 2^9).
+
+    RA "Roll Angle Magnitude"
+        definition
+            Magnitude of the roll angle.
+        element 9
+            unsigned quantity 45/256 "°"
+        remark
+            Combined with RA_SIGN into a single signed value.
+
+    TTA_STATUS "True Track Angle Status"
+        definition
+            Validity of the true track angle value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    TTA_SIGN "True Track Angle Sign"
+        definition
+            Sign of the true track angle magnitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with TTA into a single signed value,
+            normalised to [0, 360).
+
+    TTA "True Track Angle Magnitude"
+        definition
+            Magnitude of the true track angle.
+        element 10
+            unsigned quantity 90/512 "°"
+        remark
+            Combined with TTA_SIGN into a single signed value.
+
+    GS_STATUS "Ground Speed Status"
+        definition
+            Validity of the ground speed value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    GS "Ground Speed"
+        definition
+            Ground speed.
+        element 10
+            unsigned quantity 2 "kt"
+
+    TAR_STATUS "Track Angle Rate Status"
+        definition
+            Validity of the track angle rate value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    TAR_SIGN "Track Angle Rate Sign"
+        definition
+            Sign of the track angle rate magnitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with TAR into a single signed value.
+
+    TAR "Track Angle Rate Magnitude"
+        definition
+            Magnitude of the track angle rate.
+        element 9
+            unsigned quantity 8/256 "°/s"
+        remark
+            Combined with TAR_SIGN into a single signed value.
+
+    TAS_STATUS "True Airspeed Status"
+        definition
+            Validity of the true airspeed value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    TAS "True Airspeed"
+        definition
+            True airspeed.
+        element 10
+            unsigned quantity 2 "kt"

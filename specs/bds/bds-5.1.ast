@@ -1,0 +1,86 @@
+bds 5,1 "Position report coarse"
+date 2026-10-14
+preamble
+    Three-dimensional position report at coarse resolution. Intended to be
+    read together with BDS 5,2, which carries the fine position offset and
+    the figure of merit / data source.
+    Source: EUROCONTROL, Mode-S Specific Services and Data Link Test Bench,
+    "BDS 5,1 Position Report Coarse" (Mode S Specific Service Format).
+
+    Coding: the sign bit is the most significant bit of a two's complement
+    value spanning the whole sign+magnitude field, so a set sign bit yields
+    magnitude - 2**(magnitude bits). This reproduces the ranges quoted in
+    the tables (for example 19+1 bits at 360/1048576 deg gives +/-180 deg).
+
+items
+
+    STATUS "Status"
+        definition
+            Validity of the report.
+        element 1
+            table
+                0: Invalid
+                1: Valid
+        remark
+            Single status bit covering latitude, longitude and altitude.
+            Set to 0 if any of the three parameters are invalid. Identical
+            to the status bit in BDS 5,2.
+
+    LAT_SIGN "Latitude Sign"
+        definition
+            Hemisphere of the latitude.
+        element 1
+            table
+                0: North
+                1: South
+        remark
+            Combined with LAT into a single signed value.
+
+    LAT "Latitude"
+        definition
+            Aircraft latitude.
+        element 19
+            unsigned quantity 360/1048576 "°"
+        remark
+            Combined with LAT_SIGN into a single signed value.
+            Coded with an MSB of 90 degrees so that the same coding
+            algorithm applies as for longitude; the required valid range
+            is +90 to -90 degrees.
+
+    LON_SIGN "Longitude Sign"
+        definition
+            Hemisphere of the longitude.
+        element 1
+            table
+                0: East
+                1: West
+        remark
+            Combined with LON into a single signed value.
+
+    LON "Longitude"
+        definition
+            Aircraft longitude.
+        element 19
+            unsigned quantity 360/1048576 "°"
+        remark
+            Combined with LON_SIGN into a single signed value.
+
+    ALT_SIGN "Altitude Sign"
+        definition
+            Sign of the altitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with ALT into a single signed value.
+
+    ALT "Pressure Altitude"
+        definition
+            Pressure altitude of the aircraft.
+        element 14
+            unsigned quantity 8 "ft"
+        remark
+            Combined with ALT_SIGN into a single signed value.
+            The source of the data is given by the FOM/SOURCE field of
+            BDS 5,2.

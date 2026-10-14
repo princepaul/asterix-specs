@@ -1,0 +1,158 @@
+bds 6,2 "ADS-B target state and status"
+date 2026-10-14
+preamble
+    ADS-B target state and status (typecode 29): selected altitude,
+    pressure setting, selected heading and autopilot mode flags.
+    Source: RTCA DO-260B and ICAO Doc 9871, section 2.2.3.2.7.1.
+
+items
+
+    TC "Type Code"
+        definition
+            ADS-B message type code.
+        element 5
+            unsigned integer
+        remark
+            29: target state and status.
+
+    SUBTYPE "Subtype"
+        definition
+            Target state and status subtype.
+        element 2
+            unsigned integer
+        remark
+            DO-260B compliant value is 1.
+
+    SIL_SUP "SIL Supplement"
+        definition
+            Surveillance integrity level supplement, reserved.
+        element 1
+            table
+                0: Not set
+                1: Set
+
+    SAL_SOURCE "Selected Altitude Source"
+        definition
+            Source of the selected altitude.
+        element 1
+            table
+                0: MCP/FCU
+                1: FMS
+
+    SAL "Selected Altitude"
+        definition
+            Selected altitude.
+        element 11
+            unsigned integer
+        remark
+            Feet = (raw - 1) * 32. Raw 0 means not available.
+
+    QNH "Barometric Pressure Setting"
+        definition
+            Barometric pressure setting.
+        element 9
+            unsigned integer
+        remark
+            Millibar = 800 + (raw - 1) * 0.8. Raw 0 means not available.
+
+    HDG_STATUS "Selected Heading Status"
+        definition
+            Validity of the selected heading value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    SEL_HDG "Selected Heading"
+        definition
+            Selected heading.
+        element 9
+            unsigned quantity 360/512 "°"
+
+    NACP "NACp"
+        definition
+            Navigation accuracy category for position.
+        element 4
+            unsigned integer
+
+    NIC_BARO "NIC Baro"
+        definition
+            Navigation integrity category supplement, barometric.
+        element 1
+            table
+                0: Not set
+                1: Set
+
+    SIL "SIL"
+        definition
+            Surveillance integrity level.
+        element 2
+            unsigned integer
+
+    MODE_STATUS "Mode Status"
+        definition
+            Validity of the autopilot and navigation mode flags.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    MODE_CASE "Autopilot mode variant"
+        definition
+            Autopilot and navigation mode flags, valid only when
+            the mode status bit is set.
+        case MODE_STATUS
+            1:
+                group
+                    AUTOPILOT "Autopilot Engaged"
+                        definition
+                            Autopilot engaged indicator.
+                        element 1
+                            table
+                                0: Not engaged
+                                1: Engaged
+                    VNAV "VNAV Mode"
+                        definition
+                            VNAV mode active.
+                        element 1
+                            table
+                                0: Not active
+                                1: Active
+                    ALT_HOLD "Altitude Hold Mode"
+                        definition
+                            Altitude hold mode active.
+                        element 1
+                            table
+                                0: Not active
+                                1: Active
+                    spare 1
+                    APPR "Approach Mode"
+                        definition
+                            Approach mode active.
+                        element 1
+                            table
+                                0: Not active
+                                1: Active
+            default:
+                group
+                    spare 5
+
+    TCAS "TCAS Operational"
+        definition
+            TCAS operational indicator, always valid.
+        element 1
+            table
+                0: Not operational
+                1: Operational
+
+    LNAV "LNAV Mode"
+        definition
+            Lateral navigation mode active.
+        element 1
+            table
+                0: Not active
+                1: Active
+        remark
+            Valid only when the mode status bit is set.
+
+    spare 2

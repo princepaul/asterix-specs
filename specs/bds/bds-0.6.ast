@@ -1,0 +1,76 @@
+bds 0,6 "ADS-B surface position"
+date 2026-10-14
+preamble
+    ADS-B surface position (typecode 5-8). No altitude, aircraft is
+    on the ground.
+    Source: ICAO Doc 9871 (ICAO Annex 10 Vol. III) Mode S BDS register definition tables.
+
+items
+
+    TC "Type Code"
+        definition
+            ADS-B message type code.
+        element 5
+            unsigned integer
+        remark
+            5-8: surface position.
+
+    MOV "Movement"
+        definition
+            Packed ground speed code.
+        element 7
+            unsigned integer
+        remark
+            Decoded to knots via a piecewise-linear lookup;
+            0 means no information, 1 means stopped.
+
+    TRACK_STATUS "Track Status"
+        definition
+            Validity of the track value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    TRACK_CASE "Track variant"
+        definition
+            Track value, present only when valid.
+        case TRACK_STATUS
+            1:
+                group
+                    TRACK "Track"
+                        definition
+                            Ground track.
+                        element 7
+                            unsigned quantity 360/128 "°"
+            default:
+                group
+                    spare 7
+
+    T "Time Sync Bit"
+        definition
+            Time synchronization indicator.
+        element 1
+            table
+                0: Not synchronized
+                1: Synchronized
+
+    F "CPR Format"
+        definition
+            Compact position reporting format.
+        element 1
+            table
+                0: Even
+                1: Odd
+
+    CPRLAT "CPR Latitude"
+        definition
+            Raw 17-bit CPR encoded latitude.
+        element 17
+            unsigned integer
+
+    CPRLON "CPR Longitude"
+        definition
+            Raw 17-bit CPR encoded longitude.
+        element 17
+            unsigned integer

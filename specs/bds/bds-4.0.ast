@@ -1,0 +1,109 @@
+bds 4,0 "Selected vertical intention"
+date 2026-10-14
+preamble
+    Selected vertical intention, reported by the flight management system.
+    Source: ICAO Doc 9871 Table A-2-31.
+
+items
+
+    MCP_ALT_STATUS "MCP Altitude Status"
+        definition
+            Validity of the MCP/FCU selected altitude value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+        remark
+            When 0, MCP_ALT should be ignored.
+
+    MCP_ALT "MCP/FCU Selected Altitude"
+        definition
+            Selected altitude from the Mode Control Panel / Flight Control Unit.
+        element 12
+            unsigned quantity 16 "ft"
+        remark
+            MSB = 32768 ft, LSB = 16 ft.
+
+    FMS_ALT_STATUS "FMS Altitude Status"
+        definition
+            Validity of the FMS selected altitude value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    FMS_ALT "FMS Selected Altitude"
+        definition
+            Selected altitude from the Flight Management System vertical profile.
+        element 12
+            unsigned quantity 16 "ft"
+
+    BP_STATUS "Barometric Pressure Status"
+        definition
+            Validity of the barometric pressure setting value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    BP "Barometric Pressure Setting"
+        definition
+            Barometric pressure setting (QNH).
+        element 12
+            unsigned quantity 1/10 "mb"
+        remark
+            Actual value is raw * 0.1 + 800 mb.
+
+    spare 8
+
+    MODE_STATUS "Status of MCP/FCU Mode Bits"
+        definition
+            Validity of the MCP/FCU mode bits (VNAV, ALT_HOLD, APP).
+        element 1
+            table
+                0: No mode information provided
+                1: Mode information provided
+
+    VNAV "VNAV Mode"
+        definition
+            VNAV mode active.
+        element 1
+            table
+                0: Not active
+                1: Active
+
+    ALT_HOLD "ALT HOLD Mode"
+        definition
+            Altitude hold mode active.
+        element 1
+            table
+                0: Not active
+                1: Active
+
+    APP "APPROACH Mode"
+        definition
+            Approach mode active.
+        element 1
+            table
+                0: Not active
+                1: Active
+
+    spare 2
+
+    TARGET_ALT_STATUS "Status of Target Altitude Source"
+        definition
+            Validity of the target altitude source bits.
+        element 1
+            table
+                0: No source information provided
+                1: Source information provided
+
+    TARGET_ALT_SOURCE "Target Altitude Source"
+        definition
+            Source of the target (short-term intent) altitude.
+        element 2
+            table
+                0: Unknown
+                1: Aircraft altitude
+                2: FCU/MCP selected altitude
+                3: FMS selected altitude

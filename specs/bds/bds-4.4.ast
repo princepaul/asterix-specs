@@ -1,0 +1,100 @@
+bds 4,4 "Meteorological routine air report"
+date 2026-10-14
+preamble
+    Meteorological routine air report: wind, temperature, pressure,
+    turbulence and humidity at the aircraft position.
+    Source: ICAO Doc 9871 Table A-2-33.
+
+items
+
+    FOM "Figure of Merit"
+        definition
+            Figure of merit of the report.
+        element 4
+            unsigned integer
+        remark
+            Values above 4 indicate invalid data.
+
+    WIND_STATUS "Wind Status"
+        definition
+            Validity of the wind speed and direction values.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    WIND_SPEED "Wind Speed"
+        definition
+            Wind speed.
+        element 9
+            unsigned quantity 1 "kt"
+
+    WIND_DIR "Wind Direction"
+        definition
+            True wind direction.
+        element 9
+            unsigned quantity 180/256 "°"
+
+    SAT_SIGN "Static Air Temperature Sign"
+        definition
+            Sign of the static air temperature magnitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with SAT into a single signed value.
+
+    SAT "Static Air Temperature Magnitude"
+        definition
+            Magnitude of the static air temperature.
+        element 10
+            unsigned quantity 1/4 "°C"
+        remark
+            Combined with SAT_SIGN into a single signed value.
+
+    PRESS_STATUS "Static Pressure Status"
+        definition
+            Validity of the static pressure value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    PRESS "Static Pressure"
+        definition
+            Average static pressure.
+        element 11
+            unsigned quantity 1 "hPa"
+
+    TURB_STATUS "Turbulence Status"
+        definition
+            Validity of the turbulence value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    TURB "Turbulence"
+        definition
+            Turbulence level.
+        element 2
+            table
+                0: Nil
+                1: Light
+                2: Moderate
+                3: Severe
+
+    HUM_STATUS "Humidity Status"
+        definition
+            Validity of the humidity value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    HUMIDITY "Humidity"
+        definition
+            Relative humidity.
+        element 6
+            unsigned quantity 100/64 "%"

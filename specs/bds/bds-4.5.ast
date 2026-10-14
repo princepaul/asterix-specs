@@ -1,0 +1,154 @@
+bds 4,5 "Meteorological hazard report"
+date 2026-10-14
+preamble
+    Meteorological hazard report: turbulence, wind shear, microburst,
+    icing, wake vortex, temperature, pressure and radio height.
+    Source: ICAO Doc 9871 Table A-2-32.
+
+items
+
+    TURB_STATUS "Turbulence Status"
+        definition
+            Validity of the turbulence level.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    TURB "Turbulence Level"
+        definition
+            Turbulence level.
+        element 2
+            table
+                0: None
+                1: Light
+                2: Moderate
+                3: Severe
+
+    WS_STATUS "Wind Shear Status"
+        definition
+            Validity of the wind shear level.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    WS "Wind Shear Level"
+        definition
+            Wind shear level.
+        element 2
+            table
+                0: None
+                1: Light
+                2: Moderate
+                3: Severe
+
+    MB_STATUS "Microburst Status"
+        definition
+            Validity of the microburst level.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    MB "Microburst Level"
+        definition
+            Microburst level.
+        element 2
+            table
+                0: None
+                1: Light
+                2: Moderate
+                3: Severe
+
+    ICING_STATUS "Icing Status"
+        definition
+            Validity of the icing level.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    ICING "Icing Level"
+        definition
+            Icing level.
+        element 2
+            table
+                0: None
+                1: Light
+                2: Moderate
+                3: Severe
+
+    WV_STATUS "Wake Vortex Status"
+        definition
+            Validity of the wake vortex level.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    WV "Wake Vortex Level"
+        definition
+            Wake vortex encounter level.
+        element 2
+            table
+                0: None
+                1: Light
+                2: Moderate
+                3: Severe
+
+    SAT_STATUS "Static Air Temperature Status"
+        definition
+            Validity of the static air temperature value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    SAT_SIGN "Static Air Temperature Sign"
+        definition
+            Sign of the static air temperature magnitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with SAT into a single signed value.
+
+    SAT "Static Air Temperature Magnitude"
+        definition
+            Magnitude of the static air temperature.
+        element 9
+            unsigned quantity 1/4 "°C"
+        remark
+            Combined with SAT_SIGN into a single signed value.
+
+    PRESS_STATUS "Static Pressure Status"
+        definition
+            Validity of the static pressure value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    PRESS "Static Pressure"
+        definition
+            Average static pressure.
+        element 11
+            unsigned quantity 1 "hPa"
+
+    RH_STATUS "Radio Height Status"
+        definition
+            Validity of the radio height value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    RADIO_HEIGHT "Radio Height"
+        definition
+            Radio (radar) height above terrain.
+        element 12
+            unsigned quantity 16 "ft"
+
+    spare 5

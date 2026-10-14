@@ -1,0 +1,90 @@
+bds 5,2 "Position report fine"
+date 2026-10-14
+preamble
+    High precision three-dimensional position report, used in conjunction
+    with BDS 5,1. Carries the fine position offset, the source of the data
+    and the altitude.
+    Source: EUROCONTROL, Mode-S Specific Services and Data Link Test Bench,
+    "BDS 5,2 Position Report Fine" (Mode S Specific Service Format).
+
+    Coding: LAT_FINE and LON_FINE are two's complement. ALT uses the same
+    sign+magnitude two's complement coding as BDS 5,1.
+
+items
+
+    STATUS "Status"
+        definition
+            Validity of the report.
+        element 1
+            table
+                0: Invalid
+                1: Valid
+        remark
+            Single status bit covering latitude, longitude and altitude.
+            Set to 0 if any of the three parameters are invalid. Identical
+            to the status bit in BDS 5,1.
+
+    FOM "Figure of Merit and Source"
+        definition
+            Navigational performance and source of the reported data.
+        element 4
+            table
+                0: Loss of navigational capability
+                1: RNP 20, pressure altitude
+                2: RNP 5, pressure altitude
+                3: RNP 1, pressure altitude
+                4: Differential GNSS (10 m), pressure altitude
+                5: Differential GNSS (2.5 m), pressure altitude
+                6: Unassigned
+                7: Unassigned
+                8: Unassigned
+                9: Unassigned
+                10: Unassigned
+                11: RNP 1, GNSS height
+                12: Differential GNSS (10 m), height
+                13: Differential GNSS (2.5 m), height
+                14: Unassigned
+                15: Unassigned
+        remark
+            RNP is required navigational performance as defined by ICAO.
+            Suitable RNP categories have not been defined for values
+            below 1, therefore CPE (circular position error) is used.
+            Values 6-10 and 14-15 are unassigned.
+
+    LAT_FINE "Latitude Fine"
+        definition
+            Fine latitude offset, added to the BDS 5,1 latitude.
+        element 18
+            signed quantity 90/16777216 "°"
+        remark
+            Two's complement coding, must be interpreted together with the
+            corresponding parameter in BDS 5,1.
+
+    LON_FINE "Longitude Fine"
+        definition
+            Fine longitude offset, added to the BDS 5,1 longitude.
+        element 18
+            signed quantity 90/16777216 "°"
+        remark
+            Two's complement coding, must be interpreted together with the
+            corresponding parameter in BDS 5,1.
+
+    ALT_SIGN "Altitude Sign"
+        definition
+            Sign of the altitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with ALT into a single signed value.
+
+    ALT "Altitude"
+        definition
+            Pressure altitude or GNSS height, see BDS 5,2 FOM.
+        element 14
+            unsigned quantity 8 "ft"
+        remark
+            Combined with ALT_SIGN into a single signed value.
+            When GNSS height is contained in this field, the pressure
+            altitude can be obtained from BDS 5,1.

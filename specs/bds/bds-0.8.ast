@@ -1,0 +1,30 @@
+bds 0,8 "ADS-B aircraft identification and category"
+date 2026-10-14
+preamble
+    ADS-B aircraft identification and category (typecode 1-4).
+    Source: ICAO Doc 9871 (ICAO Annex 10 Vol. III) Mode S BDS register definition tables.
+
+items
+
+    TC "Type Code"
+        definition
+            ADS-B message type code.
+        element 5
+            unsigned integer
+        remark
+            1-4: identification and category.
+
+    CAT "Aircraft Category"
+        definition
+            Emitter category.
+        element 3
+            unsigned integer
+        remark
+            Meaning depends on the type code; wake vortex category
+            is derived from (TC, CAT).
+
+    CS "Callsign"
+        definition
+            Aircraft identification, 8 ICAO 6-bit characters.
+        element 48
+            string icao

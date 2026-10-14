@@ -1,0 +1,19 @@
+bds 2,0 "Aircraft identification"
+date 2026-10-14
+preamble
+    Aircraft identification (Comm-B).
+    Source: ICAO Doc 9871 (ICAO Annex 10 Vol. III) Mode S BDS register definition tables.
+
+items
+
+    BDSID "BDS Identifier"
+        definition
+            BDS register identifier, fixed 0x20.
+        element 8
+            unsigned integer
+
+    CS "Callsign"
+        definition
+            Aircraft identification, 8 ICAO 6-bit characters.
+        element 48
+            string icao

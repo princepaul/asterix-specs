@@ -1,0 +1,160 @@
+bds 0,9 "ADS-B airborne velocity"
+date 2026-10-14
+preamble
+    ADS-B airborne velocity (typecode 19). Subtypes 1-2 carry ground
+    speed components, subtypes 3-4 carry airspeed and heading.
+    Source: ICAO Doc 9871 (ICAO Annex 10 Vol. III) Mode S BDS register definition tables.
+
+items
+
+    TC "Type Code"
+        definition
+            ADS-B message type code.
+        element 5
+            unsigned integer
+        remark
+            19: airborne velocity.
+
+    SUBTYPE "Subtype"
+        definition
+            Velocity message subtype.
+        element 3
+            table
+                1: Subsonic ground speed
+                2: Supersonic ground speed
+                3: Subsonic airspeed
+                4: Supersonic airspeed
+
+    ICF "Intent Change Flag"
+        definition
+            Intent change flag.
+        element 1
+            table
+                0: No change in intent
+                1: Change in intent
+
+    IFR "IFR Capability Flag"
+        definition
+            IFR capability flag.
+        element 1
+            table
+                0: No IFR capability
+                1: IFR capable
+
+    NACV "NAC for Velocity"
+        definition
+            Navigation accuracy category for velocity.
+        element 3
+            unsigned integer
+
+    VEL_CASE "Velocity variant"
+        definition
+            Speed components, layout depends on the subtype.
+        case SUBTYPE
+            1,2:
+                group
+                    VEW_SIGN "East-West Velocity Sign"
+                        definition
+                            Sign of the east-west velocity component.
+                        element 1
+                            table
+                                0: East
+                                1: West
+                    VEW "East-West Velocity Magnitude"
+                        definition
+                            Magnitude of the east-west velocity component.
+                        element 10
+                            unsigned integer
+                        remark
+                            Actual value is (raw - 1) kt, times 4 for subtype 2.
+                            Combined with VNS into ground speed and track.
+                    VNS_SIGN "North-South Velocity Sign"
+                        definition
+                            Sign of the north-south velocity component.
+                        element 1
+                            table
+                                0: North
+                                1: South
+                    VNS "North-South Velocity Magnitude"
+                        definition
+                            Magnitude of the north-south velocity component.
+                        element 10
+                            unsigned integer
+                        remark
+                            Actual value is (raw - 1) kt, times 4 for subtype 2.
+                            Combined with VEW into ground speed and track.
+            3,4:
+                group
+                    HDG_STATUS "Heading Status"
+                        definition
+                            Validity of the heading value.
+                        element 1
+                            table
+                                0: Not valid
+                                1: Valid
+                    HDG "Heading"
+                        definition
+                            Heading.
+                        element 10
+                            unsigned quantity 360/1024 "°"
+                        remark
+                            Valid only when HDG_STATUS is 1.
+                    AS_TYPE "Airspeed Type"
+                        definition
+                            Airspeed type.
+                        element 1
+                            table
+                                0: Indicated airspeed
+                                1: True airspeed
+                    AS "Airspeed Magnitude"
+                        definition
+                            Magnitude of the airspeed.
+                        element 10
+                            unsigned integer
+                        remark
+                            Actual value is (raw - 1) kt, times 4 for subtype 4.
+            default:
+                group
+                    spare 22
+
+    VR_SOURCE "Vertical Rate Source"
+        definition
+            Source of the vertical rate.
+        element 1
+            table
+                0: GNSS
+                1: Barometric
+
+    VR_SIGN "Vertical Rate Sign"
+        definition
+            Sign of the vertical rate magnitude.
+        element 1
+            table
+                0: Climb
+                1: Descent
+
+    VR_MAG "Vertical Rate Magnitude"
+        definition
+            Magnitude of the vertical rate.
+        element 9
+            unsigned integer
+        remark
+            Actual value is (raw - 1) * 64 ft/min.
+
+    spare 2
+
+    DIFF_SIGN "GNSS-Baro Difference Sign"
+        definition
+            Sign of the GNSS minus barometric altitude difference.
+        element 1
+            table
+                0: Positive
+                1: Negative
+
+    DIFF_MAG "GNSS-Baro Difference Magnitude"
+        definition
+            Magnitude of the GNSS minus barometric altitude difference.
+        element 7
+            unsigned integer
+        remark
+            Actual value is (raw - 1) * 25 ft.

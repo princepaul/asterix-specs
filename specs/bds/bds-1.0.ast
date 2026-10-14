@@ -1,0 +1,133 @@
+bds 1,0 "Data link capability report"
+date 2026-10-14
+preamble
+    Data link capability report of the transponder.
+    Source: ICAO Doc 9871 Table A-2-16.
+
+items
+
+    BDSID "BDS Identifier"
+        definition
+            BDS register identifier, fixed 0x10.
+        element 8
+            unsigned integer
+
+    CONT "Continuation Flag"
+        definition
+            Continuation flag.
+        element 1
+            table
+                0: No continuation
+                1: Continuation follows
+
+    spare 5
+
+    OVC "Overlay Command Capability"
+        definition
+            Overlay command capability.
+        element 1
+            table
+                0: No overlay command capability
+                1: Overlay command capable
+
+    ACASOP "ACAS Operational"
+        definition
+            ACAS operational indicator.
+        element 1
+            table
+                0: ACAS not operational
+                1: ACAS operational
+
+    SUBNET "Mode S Subnetwork Version"
+        definition
+            Mode S subnetwork version number.
+        element 7
+            unsigned integer
+
+    LVL5 "Transponder Level 5"
+        definition
+            Level 5 transponder (enhanced protocol) capability.
+        element 1
+            table
+                0: Not level 5 capable
+                1: Level 5 capable
+
+    MSS "Mode S Specific Services"
+        definition
+            Mode S specific services capability.
+        element 1
+            table
+                0: No specific services capability
+                1: Specific services capable
+
+    ELM_UP "Uplink ELM Throughput"
+        definition
+            Uplink ELM throughput capability.
+        element 3
+            unsigned integer
+
+    ELM_DOWN "Downlink ELM Throughput"
+        definition
+            Downlink ELM throughput capability.
+        element 4
+            unsigned integer
+
+    AIDCAP "Aircraft Identification Capability"
+        definition
+            Aircraft identification capability.
+        element 1
+            table
+                0: No capability
+                1: Capable
+
+    SQCAP "Squitter Capability"
+        definition
+            Squitter capability.
+        element 1
+            table
+                0: No capability
+                1: Capable
+
+    SICAP "Surveillance Identifier Code Capability"
+        definition
+            Surveillance identifier code capability.
+        element 1
+            table
+                0: No capability
+                1: Capable
+
+    GICBCAP "Common Usage GICB Capability"
+        definition
+            Common usage GICB capability.
+        element 1
+            table
+                0: No capability
+                1: Capable
+
+    HYB "ACAS Hybrid Surveillance"
+        definition
+            ACAS hybrid surveillance capability.
+        element 1
+            table
+                0: No capability
+                1: Capable
+
+    RA "ACAS Resolution Advisory"
+        definition
+            ACAS resolution advisory capability.
+        element 1
+            table
+                0: No capability
+                1: Capable
+
+    RTCAVER "ACAS RTCA Version"
+        definition
+            ACAS RTCA version.
+        element 2
+            unsigned integer
+
+    DTE "DTE Status"
+        definition
+            Data terminal equipment status array.
+        element 16
+            raw

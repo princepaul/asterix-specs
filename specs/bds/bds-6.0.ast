@@ -1,0 +1,117 @@
+bds 6,0 "Heading and speed report"
+date 2026-10-14
+preamble
+    Heading and speed report, magnetic heading, indicated airspeed,
+    Mach number and vertical rates from the air data computer.
+    Source: ICAO Doc 9871 Table A-2-35.
+    Note: signed fields use sign bit + magnitude encoding
+    (not two's complement).
+
+items
+
+    HDG_STATUS "Heading Status"
+        definition
+            Validity of the magnetic heading value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    HDG_SIGN "Magnetic Heading Sign"
+        definition
+            Sign of the magnetic heading magnitude.
+        element 1
+            table
+                0: Positive
+                1: Negative
+        remark
+            Combined with HDG into a single signed value,
+            normalised to [0, 360).
+
+    HDG "Magnetic Heading Magnitude"
+        definition
+            Magnitude of the magnetic heading.
+        element 10
+            unsigned quantity 90/512 "°"
+        remark
+            Combined with HDG_SIGN into a single signed value.
+
+    IAS_STATUS "Indicated Airspeed Status"
+        definition
+            Validity of the indicated airspeed value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    IAS "Indicated Airspeed"
+        definition
+            Indicated airspeed.
+        element 10
+            unsigned quantity 1 "kt"
+
+    MACH_STATUS "Mach Status"
+        definition
+            Validity of the Mach number value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    MACH "Mach Number"
+        definition
+            Mach number.
+        element 10
+            unsigned quantity 1/250 "Mach"
+
+    BAR_STATUS "Barometric Vertical Rate Status"
+        definition
+            Validity of the barometric vertical rate value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    BAR_SIGN "Barometric Vertical Rate Sign"
+        definition
+            Sign of the barometric vertical rate magnitude.
+        element 1
+            table
+                0: Positive (climb)
+                1: Negative (descent)
+        remark
+            Combined with BAR into a single signed value.
+
+    BAR "Barometric Vertical Rate Magnitude"
+        definition
+            Magnitude of the barometric vertical rate.
+        element 9
+            unsigned quantity 32 "ft/min"
+        remark
+            Combined with BAR_SIGN into a single signed value.
+
+    IVV_STATUS "Inertial Vertical Rate Status"
+        definition
+            Validity of the inertial vertical rate value.
+        element 1
+            table
+                0: Not valid
+                1: Valid
+
+    IVV_SIGN "Inertial Vertical Rate Sign"
+        definition
+            Sign of the inertial vertical rate magnitude.
+        element 1
+            table
+                0: Positive (climb)
+                1: Negative (descent)
+        remark
+            Combined with IVV into a single signed value.
+
+    IVV "Inertial Vertical Rate Magnitude"
+        definition
+            Magnitude of the inertial vertical rate.
+        element 9
+            unsigned quantity 32 "ft/min"
+        remark
+            Combined with IVV_SIGN into a single signed value.
