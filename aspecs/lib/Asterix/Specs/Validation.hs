@@ -442,8 +442,19 @@ instance Validate Expansion where
             withPreffix name $ do
                 when (addedOffset nsp /= mempty) "alignment error"
 
+instance Validate Bds where
+    validate (Bds _reg _title date _preamble items) = do
+        validate date
+        forM_ items $ \case
+            Spare _ _ -> pure ()
+            Item nsp@(NonSpare (ItemName name) _ _ _) -> do
+                validate nsp
+                withPreffix name $ do
+                    when (addedOffset nsp /= mempty) "alignment error"
+
 instance Validate Asterix where
     validate = \case
         AsterixBasic x -> validate x
         AsterixExpansion x -> validate x
+        AsterixBds x -> validate x
 

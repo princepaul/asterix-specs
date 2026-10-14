@@ -26,6 +26,7 @@ fBasic :: Asterix -> [Basic]
 fBasic = \case
     AsterixBasic bas -> [bas]
     AsterixExpansion _ -> []
+    AsterixBds _ -> []
 
 fNspRuleNameVar :: NonSpare () -> [(ItemName, Rule (Variation ()))]
 fNspRuleNameVar (NonSpare name _title rule _doc) = [(name, rule)]

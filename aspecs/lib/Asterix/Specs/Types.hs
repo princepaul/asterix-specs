@@ -207,7 +207,22 @@ data Expansion = Expansion
     , expItems     :: [Maybe (NonSpare ())]
     } deriving (Generic, Eq, Ord, Show, Read)
 
+-- BDS register definition.
+-- The register is identified by its pair of octal numbers (ICAO Doc 9705,
+-- Annex 10, Volume 3 Part I), written as "R1,R2" - for example "4,0".
+newtype BdsRegister = BdsRegister Text
+    deriving (Generic, Eq, Ord, Show, Read)
+
+data Bds = Bds
+    { bdsRegister :: BdsRegister
+    , bdsTitle    :: Title
+    , bdsDate     :: Date
+    , bdsPreamble :: Maybe Text
+    , bdsContents :: [Item ()]   -- a BDS bit layout may contain spare bits
+    } deriving (Generic, Eq, Ord, Show, Read)
+
 data Asterix
     = AsterixBasic Basic
     | AsterixExpansion Expansion
+    | AsterixBds Bds
     deriving (Generic, Eq, Ord, Show, Read)

@@ -31,6 +31,7 @@ fAstNsp :: Asterix -> [NonSpare ()]
 fAstNsp = \case
     AsterixBasic val -> basCatalogue val
     AsterixExpansion val -> catMaybes $ expItems val
+    AsterixBds val -> [ nsp | Item nsp <- bdsContents val ]
 
 fNspRuleVar :: NonSpare () -> [Rule (Variation ())]
 fNspRuleVar (NonSpare _name _title rule _doc) = [rule]

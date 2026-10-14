@@ -30,6 +30,9 @@ identify :: Asterix -> (String, CatNum, Edition)
 identify = \case
     AsterixBasic val -> ("Basic", basCategory val, basEdition val)
     AsterixExpansion val -> ("Expansion", expCategory val, expEdition val)
+    -- A BDS register is not a category, so it has no category number or
+    -- edition. Only the tag of this tuple is ever used for reporting.
+    AsterixBds _ -> ("Bds", CatNum 0, Edition 0 0)
 
 main :: IO ()
 main = withUtf8 $ do

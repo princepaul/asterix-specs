@@ -48,6 +48,47 @@ let
         ${builtins.toJSON obj}
       '';
 
+  # BDS registers are kept out of the category manifest on purpose, so that
+  # the existing manifest.json stays byte compatible for consumers which only
+  # care about ASTERIX categories. They are published in their own
+  # $out/bds/manifest.json instead.
+
+  findBds = s:
+    let m = builtins.match "bds-(.*)\\.ast" s;
+    in if m == null
+      then null
+      else builtins.head m;
+
+  bdsListing =
+    builtins.attrNames (packages.lib.attrsets.filterAttrs isRegular
+      (builtins.readDir (./. + "/bds")));
+
+  bdsRaw = values (map findBds bdsListing);
+
+  # Source files are named bds-<R1>.<R2>.ast, e.g. bds-4.0.ast. The register
+  # as written inside the source uses a comma (bds 4,0 "..."), so Wireshark
+  # has to translate between the two when it builds the download URL.
+  bdsPair = s:
+    let m = builtins.match "(.*)\\.(.*)" s;
+    in if m == null
+      then null
+      else { r1 = builtins.head m; r2 = builtins.head (builtins.tail m); };
+
+  # Registers are identified by two octal numbers, so they have to be
+  # compared numerically ("4,10" comes after "4,2", not before).
+  compareBds = a: b:
+    let c = builtins.compareVersions (bdsPair a).r1 (bdsPair b).r1;
+    in if c == 0
+      then builtins.compareVersions (bdsPair a).r2 (bdsPair b).r2
+      else c;
+
+  bdsRegs = builtins.sort compareBds bdsRaw;
+
+  bdsManifest =
+    packages.writeText "asterix-specs-bds-manifest" ''
+      ${builtins.toJSON bdsRegs}
+    '';
+
   level1 = catnum:
     let
       asterix-spec = catnumber: spectype: edition:
@@ -91,6 +132,20 @@ let
     let linkCategory = cat: "\"" + cat + " " + level1 cat + "\"";
     in toString (map linkCategory cats);
 
+  bdsSpec = reg: import ./spec.nix {
+    inherit packages;
+    catnumber = "bds";
+    spectype = "reg";
+    edition = let p = bdsPair reg; in "${p.r1}.${p.r2}";
+    srcpath = "/bds/bds-" + reg + ".ast";
+    stem = reg;
+    docs = false;
+  };
+
+  levelBds =
+    let linkBds = reg: "\"" + reg + " " + bdsSpec reg + "\"";
+    in toString (map linkBds bdsRegs);
+
   drv = packages.stdenv.mkDerivation {
     name = "asterix-specs";
     src = builtins.filterSource
@@ -108,6 +163,13 @@ let
       for i in ${linkCategories}; do
         set -- $i
         ln -s $2 $out/specs/cat$1
+      done
+
+      mkdir -p $out/bds
+      cat ${bdsManifest} | ${packages.jq}/bin/jq > $out/bds/manifest.json
+      for i in ${levelBds}; do
+        set -- $i
+        ln -s $2 $out/bds/bds$1
       done
     '';
   };

@@ -282,6 +282,16 @@ toPandoc = \case
         mkItem = \case
             Nothing -> para $ emph "Spare"
             Just nsp -> tp [] nsp
+    AsterixBds val -> doc $
+        header 1 (mkTitle "BDS register" reg title)
+        <> mkDate date
+        <> header 2 "Preamble"
+        <> maybe (para $ emph "None") fromRST mPreamble
+        <> header 2 "Description of bits"
+        <> mconcat (fmap (tp []) contents)
+      where
+        Bds bdsReg title date mPreamble contents = val
+        BdsRegister reg = bdsReg
   where
     mkTitle s cat title = str $
         sformat (stext % " " % stext % " - " % stext) s cat (coerce title)

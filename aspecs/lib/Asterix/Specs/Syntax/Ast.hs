@@ -360,6 +360,10 @@ pItem sc' = tryOne
 pItems :: Parser [NonSpare ()]
 pItems = snd <$> parseList (MC.string "items") pNonSpare
 
+-- | Parse toplevel items, allowing spare bits (used by BDS registers).
+pItemsBds :: Parser [Item ()]
+pItemsBds = snd <$> parseList (MC.string "items") pItem
+
 -- | Parser valid uap name.
 pUapName :: Parser UapName
 pUapName = UapName . T.pack <$> some (alphaNumChar <|> MC.char '-')
@@ -466,11 +470,36 @@ pExpansion = do
     scn
     pure $ Expansion cat title edition date fspecSize items
 
+-- | Parse BDS register number, for example '4,0'.
+pBdsRegister :: Parser BdsRegister
+pBdsRegister = do
+    (a,b) <- (,) <$> L.decimal <*> (MC.char ',' *> L.decimal)
+    pure . BdsRegister $ T.pack (show a ++ "," ++ show b)
+
+-- | Parse BDS register definition.
+--
+-- > bds 4,0 "Target Radar"
+-- > date 2021-01-01
+-- > preamble
+-- >     normative source ...
+-- > items
+-- >     altitude "Barometric altitude" element 12 unsigned integer
+pBds :: Parser Bds
+pBds = do
+    MC.string "bds" >> sc
+    reg <- pBdsRegister
+    title <- scn >> (Title . T.pack <$> stringLiteral)
+    date <- scn >> pDate
+    preamble <- optional (try (scn >> pPreamble))
+    items <- scn >> pItemsBds
+    pure $ Bds reg title date preamble items
+
 -- | Parse asterix.
 pAsterix :: Parser Asterix
 pAsterix = tryOne
     [ AsterixBasic <$> pBasic
     , AsterixExpansion <$> pExpansion
+    , AsterixBds <$> pBds
     ]
 
 -- | Dump to Text
@@ -653,10 +682,30 @@ instance MkBlock Expansion where
         Edition ed1 ed2 = edition
         Date year month day = date
 
+instance MkBlock Bds where
+    mkBlock bds = do
+        fmt ("bds " % stext % " \"" % stext % "\"") reg title
+        fmt ("date " % int % "-" % left 2 '0' % "-" % left 2 '0') year month day
+        case bdsPreamble bds of
+            Nothing -> mempty
+            Just preamble -> do
+                line "preamble"
+                indent $ forM_ (T.lines preamble) $ \i -> fmt stext i
+        ""
+        line "items"
+        ""
+        indent $ blocksLn (mkBlock <$> bdsContents bds)
+      where
+        blocksLn lst = mconcat $ intersperse "" lst
+        BdsRegister reg = bdsRegister bds
+        Title title = bdsTitle bds
+        (Date year month day) = bdsDate bds
+
 instance MkBlock Asterix where
     mkBlock = \case
         AsterixBasic basic -> mkBlock basic
         AsterixExpansion expansion -> mkBlock expansion
+        AsterixBds bds -> mkBlock bds
 
 coder :: Coder
 coder = Coder

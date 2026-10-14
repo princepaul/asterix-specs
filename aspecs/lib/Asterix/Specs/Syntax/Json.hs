@@ -71,6 +71,9 @@ instance FromJSON Title
 instance ToJSON BdsAddr
 instance FromJSON BdsAddr
 
+instance ToJSON BdsRegister
+instance FromJSON BdsRegister
+
 instance ToJSON Edition where
     toJSON (Edition a b) = object
         [ "major" .= a
@@ -404,15 +407,34 @@ instance FromJSON Expansion where
         <*> o .: "fspecByteSize"
         <*> o .: "items"
 
+instance ToJSON Bds where
+    toJSON (Bds reg title date preamble items) = object
+        [ "register" .= reg
+        , "title" .= title
+        , "date" .= date
+        , "preamble" .= preamble
+        , "items" .= items
+        ]
+
+instance FromJSON Bds where
+    parseJSON = withObject "Bds" $ \o -> Bds
+        <$> o .: "register"
+        <*> o .: "title"
+        <*> o .: "date"
+        <*> o .:? "preamble"
+        <*> o .: "items"
+
 instance ToJSON Asterix where
     toJSON = \case
         AsterixBasic x -> tagged "AsterixBasic" x
         AsterixExpansion x -> tagged "AsterixExpansion" x
+        AsterixBds x -> tagged "AsterixBds" x
 
 instance FromJSON Asterix where
     parseJSON = untagged "Asterix"
         [ ("AsterixBasic", fmap AsterixBasic . parseJSON)
         , ("AsterixExpansion", fmap AsterixExpansion . parseJSON)
+        , ("AsterixBds", fmap AsterixBds . parseJSON)
         ]
 
 coder :: Coder
